@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
@@ -14,35 +13,46 @@
   <body>
     <main>
       <div class="authOptions">
-        <h1>Homepage</h1>
+        <h1><a href="/posts">Homepage</a></h1>
+
         <% if (!user) { %>
-        <a role="button" href="/auth/login">Login</a>
+          <a role="button" href="/auth/login">Login</a>
         <% } else { %>
-        <a role="button" href="/auth/logout">Logout</a>
+          <a role="button" href="/auth/logout">Logout</a>
+          <a role="button" href="/posts/create">Create Post</a>
         <% } %>
       </div>
+
       <h2>Welcome, <%= user?.uname || "Visitor" %></h2>
-      <div>
-        <p>All Posts</p>
-        <% posts.forEach(post => { %>
-        <div class="individualPost">
-          <a href="/posts/show/<%=post.id%>"><%= post.title %></a>
-          <p><%= post.description %></p>
-        </div>
-        <% }) %>
+
+      <div style="margin-bottom: 1rem;">
+        <a href="/subs/list">View Subgroups</a>
       </div>
 
       <div>
-        <a href="/subs/list">Subgroups</a>
-      </div>
+        <h3>All Posts</h3>
 
-      <div>
-        <a role="button" href="/posts/create">Create Post</a>
+        <% if (posts && posts.length > 0) { %>
+          <% posts.forEach(post => { %>
+            <div class="individualPost" style="margin-bottom: 1.5rem;">
+              <a href="/posts/show/<%= post.id %>">
+                <strong><%= post.title %></strong>
+              </a>
+
+              <p><%= post.description %></p>
+
+              <small>
+                Posted by 
+                <%= post.creator?.uname || post.creator %> 
+                |
+                <%= new Date(post.timestamp).toLocaleString() %>
+              </small>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <p>No posts yet.</p>
+        <% } %>
       </div>
-      <p style="color: rgb(197, 172, 172)">
-        😦 Heads up...you probably want to hide the Create Post button above for
-        non-logged-in users!
-      </p>
     </main>
   </body>
 </html>

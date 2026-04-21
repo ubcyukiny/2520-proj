@@ -1,5 +1,11 @@
 # Term Assignment
 
+## Members
+
+Luke Dimal
+Vincent Kim
+Ken Yu
+
 ## Introduction
 
 In this assignment, you will demonstrate an ability to make a multi-page app, with no need to write front-end JavaScript. You will use Express.js, including a templating engine, to implement multiple routes across multiple resources, and you will use passport to allow users to login.
@@ -83,7 +89,6 @@ All GET routes, unless otherwise specified, should `res.render` a template. All 
       - each entry has a link, which uses the title for its visible text ✅
       - each entry also lists the user that created it
 - subs
-
   - `GET /subs/list`
     - shows a list of all existing subs that have at least one post
       - each entry is a link to the appropriate `GET /subs/show/:subname`
